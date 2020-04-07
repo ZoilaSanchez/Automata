@@ -1,9 +1,10 @@
+#ctrl + k +c (comenta), ctrl + k +u (descomenta)
 import turtle
-cadena = "abc"
+cadena = "abcdef"
 flechas = []
 simbolosJerarquia = ["(", ")"]
 simbolosOperaciones =["|", "*"]
-for var in range (0, len(cadena)+1):
+for var in range (0, len(cadena)+2):#Agrego una flecha de mas talvez sirva
     var = turtle.Turtle()
     var.hideturtle()#Las escondo como no las estoy utilizando
     flechas.append(var)
@@ -47,7 +48,7 @@ def dibujarflechaR(letter,flecha):#De flecha recta
     arrow = turtle.Turtle()
     #Lo movemos mas adelante ya que se dibuja un circulo y las letras
     arrow.penup()
-    arrow.setposition(flecha._position[0]+85, flecha._position[1])
+    arrow.setposition(flecha._position[0]+60, flecha._position[1])
     arrow.pendown()
     if(len(letter) > 1):
         letter = ','.join(letter)#concateno si es a,b
@@ -89,15 +90,6 @@ def dibujarflechaC(letter,flecha):#De flecha circular
     arrow.pendown()
     return arrow
 #----------------------------------------------------------------------
-flechas[0].penup()
-flechas[0].setposition(-450,270)#si no levantamos el lapiz dejara marca
-flechas[0].pendown()
-flechas[0].forward(60)
-dibujarCirculo('q0', True, flechas[0])
-dibujarflechaC("ab", flechas[0])
-#algo =dibujarflechaR("ab", flechas[0])
-#dibujarCirculo('q1', False, algo)
-#dibujarflechaC('c', algo)
 arreglo1 = []
 final = False
 inicio = False
@@ -114,13 +106,32 @@ for var in cadena:
         arreglo2.append(var)
     elif(var != "*" and var != "(" and var != ")"):
         #print("inserto en el otro ",var)
-        arreglo1.append(var)   
+        arreglo1.append(var) 
+flechas[0].penup()
+flechas[0].setposition(-450,270)#si no levantamos el lapiz dejara marca
+flechas[0].pendown()
+flechas[0].forward(60)
+#dibujarCirculo('q0', False, flechas[0])
+flechas[0] = dibujarCirculo('q0', False, flechas[0])
+
+
+#dibujarflechaC("ab", flechas[0])
+#algo =dibujarflechaR("ab", flechas[0])
+#dibujarCirculo('q1', False, algo)
+#dibujarflechaC('c', algo)  
+valor = 1
 for var in (arreglo1):
+    momentaneo = flechas[valor-1]
+    momentaneo2 = flechas[valor-1]
     if type(var) == list or type(var) == tuple:
         print("a is a list")
     else:
-
-        print("procedimiento facil")
-    
+        momentaneo2 = dibujarflechaR(var,momentaneo)
+        cadena = "q" + str(valor).strip()#concateno sin espacio
+        if(var != arreglo1[len(arreglo1) - 1]):
+            flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
+        else:#Aqui detecta si es estado final
+            flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)      
+    valor += 1
 ventana.exitonclick()
 
