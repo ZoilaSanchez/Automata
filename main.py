@@ -41,8 +41,9 @@ def dibujarCirculo(nombre, final, flecha):
     style = ('Courier', 12, 'italic')
     circulo.write(nombre, font=style, align='center')
     circulo.hideturtle()
+    return circulo
 #------------------------------------------------------
-def dibujarflecha(letter,flecha):
+def dibujarflechaR(letter,flecha):#De flecha recta
     arrow = turtle.Turtle()
     #Lo movemos mas adelante ya que se dibuja un circulo y las letras
     arrow.penup()
@@ -54,14 +55,49 @@ def dibujarflecha(letter,flecha):
     arrow.write(letter, font=style, align='center')
     arrow.backward(25)
     arrow.forward(60)
-
-
+    return arrow
+#----------------------------------------------------------
+def dibujarflechaC(letter,flecha):#De flecha circular
+    arrow = turtle.Turtle()
+    #Lo movemos mas adelante ya que se dibuja un circulo y las letras
+    arrow.penup()
+    arrow.setposition(flecha._position[0]+30, flecha._position[1])
+    arrow.left(90)
+    arrow.forward(30)
+    arrow.pendown()
+    if(len(letter) > 1):
+        letter = ','.join(letter)#concateno si es a,b
+    style = ('Courier', 12, 'italic')
+    ########    escribo palabra
+    arrow.penup()
+    arrow.right(90)
+    arrow.forward(35)
+    arrow.pendown()
+    arrow.write(letter, font=style, align='center')
+    arrow.penup()
+    arrow.backward(35)
+    arrow.right(-90)
+    arrow.pendown()
+    #########
+    arrow.width(2)
+    arrow.right(90)#Se posiciona para hacer bien el circulo
+    arrow.circle(20)
+    #colocando para que se mire bien que regresa a si mismo
+    arrow.right(90)
+    arrow.penup()
+    arrow.forward(5)
+    arrow.pendown()
+    return arrow
+#----------------------------------------------------------------------
 flechas[0].penup()
-flechas[0].setposition(-450,280)#si no levantamos el lapiz dejara marca
+flechas[0].setposition(-450,270)#si no levantamos el lapiz dejara marca
 flechas[0].pendown()
 flechas[0].forward(60)
 dibujarCirculo('q0', True, flechas[0])
-dibujarflecha("ab", flechas[0])
+dibujarflechaC("ab", flechas[0])
+#algo =dibujarflechaR("ab", flechas[0])
+#dibujarCirculo('q1', False, algo)
+#dibujarflechaC('c', algo)
 arreglo1 = []
 final = False
 inicio = False
