@@ -1,6 +1,6 @@
 #ctrl + k +c (comenta), ctrl + k +u (descomenta)
 import turtle
-cadena = "abcdef"
+cadena = "abb"
 flechas = []
 simbolosJerarquia = ["(", ")"]
 simbolosOperaciones =["|", "*"]
@@ -90,12 +90,20 @@ def dibujarflechaC(letter,flecha):#De flecha circular
     arrow.pendown()
     return arrow
 #----------------------------------------------------------------------
+arreglo0 = []
 arreglo1 = []
 final = False
 inicio = False
 #Con esto se cuantas concatenaciones debo hacer en total
 for var in cadena:
-    if(var == simbolosJerarquia[0]):
+    print(var)
+    if(var == "|"):
+        print("me ejecuto")
+        arreglo0.append(arreglo1)
+        arreglo1 = []
+        final = False
+        inicio = False 
+    elif(var == simbolosJerarquia[0]):
         inicio = True
         arreglo2 = []
     elif(var == simbolosJerarquia[1]):
@@ -106,7 +114,9 @@ for var in cadena:
         arreglo2.append(var)
     elif(var != "*" and var != "(" and var != ")"):
         #print("inserto en el otro ",var)
-        arreglo1.append(var) 
+        arreglo1.append(var)
+print(arreglo1)
+print("el arreglo mejor es ", arreglo0)
 flechas[0].penup()
 flechas[0].setposition(-450,270)#si no levantamos el lapiz dejara marca
 flechas[0].pendown()
@@ -128,7 +138,7 @@ for var in (arreglo1):
     else:
         momentaneo2 = dibujarflechaR(var,momentaneo)
         cadena = "q" + str(valor).strip()#concateno sin espacio
-        if(var != arreglo1[len(arreglo1) - 1]):
+        if(valor != len(arreglo1)):
             flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
         else:#Aqui detecta si es estado final
             flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)      
