@@ -1,6 +1,6 @@
 #ctrl + k +c (comenta), ctrl + k +u (descomenta)
 import turtle
-cadena = "abb"
+cadena = "a|a"
 flechas = []
 simbolosJerarquia = ["(", ")"]
 simbolosOperaciones =["|", "*"]
@@ -90,20 +90,12 @@ def dibujarflechaC(letter,flecha):#De flecha circular
     arrow.pendown()
     return arrow
 #----------------------------------------------------------------------
-arreglo0 = []
 arreglo1 = []
 final = False
 inicio = False
 #Con esto se cuantas concatenaciones debo hacer en total
 for var in cadena:
-    print(var)
-    if(var == "|"):
-        print("me ejecuto")
-        arreglo0.append(arreglo1)
-        arreglo1 = []
-        final = False
-        inicio = False 
-    elif(var == simbolosJerarquia[0]):
+    if(var == simbolosJerarquia[0]):
         inicio = True
         arreglo2 = []
     elif(var == simbolosJerarquia[1]):
@@ -115,8 +107,6 @@ for var in cadena:
     elif(var != "*" and var != "(" and var != ")"):
         #print("inserto en el otro ",var)
         arreglo1.append(var)
-print(arreglo1)
-print("el arreglo mejor es ", arreglo0)
 flechas[0].penup()
 flechas[0].setposition(-450,270)#si no levantamos el lapiz dejara marca
 flechas[0].pendown()
@@ -131,6 +121,7 @@ flechas[0] = dibujarCirculo('q0', False, flechas[0])
 #dibujarflechaC('c', algo)  
 valor = 1
 for var in (arreglo1):
+    print(var)
     momentaneo = flechas[valor-1]
     momentaneo2 = flechas[valor-1]
     if type(var) == list or type(var) == tuple:
@@ -138,8 +129,12 @@ for var in (arreglo1):
     else:
         momentaneo2 = dibujarflechaR(var,momentaneo)
         cadena = "q" + str(valor).strip()#concateno sin espacio
-        if(valor != len(arreglo1)):
-            flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
+        if(valor != len(arreglo1)): #Sirve para cuando es a|b     
+            if(valor != len(arreglo1)):
+                if(arreglo1[valor] == "|"):
+                    flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)
+                else:
+                    flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
         else:#Aqui detecta si es estado final
             flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)      
     valor += 1
