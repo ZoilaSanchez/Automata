@@ -1,6 +1,7 @@
 #ctrl + k +c (comenta), ctrl + k +u (descomenta)
 import turtle
-cadena = "ab|abcc"
+#cadena = "abc(b)*|ba"
+cadena = "(c)*|b"
 flechas = []
 simbolosJerarquia = ["(", ")"]
 simbolosOperaciones =["|", "*"]
@@ -97,6 +98,7 @@ arreglo1 = []
 final = False
 inicio = False
 #Con esto se cuantas concatenaciones debo hacer en total
+aux = 1 #Sirve para saber una posicion adelante
 for var in cadena:
     if(var == simbolosJerarquia[0]):
         inicio = True
@@ -105,18 +107,41 @@ for var in cadena:
         inicio = False
         arreglo1.append(arreglo2)
     if(inicio == True and var != "("):
-        #print("inserto ", var)
+        #print("inserto ", var, aux+1)
         arreglo2.append(var)
+        #"a|b(a)*" inserto * en los arreglos
+        if(aux != len(cadena)):
+            if(cadena[aux+1] == "*"):
+                arreglo2.append(cadena[aux+1])#me muevo para saltar parentesis
+                #print("hasta esta posicion llego", cadena[aux+1]) 
     elif(var != "*" and var != "(" and var != ")"):
         #print("inserto en el otro ",var)
         arreglo1.append(var)
+    aux += 1
 flechas[0].penup()
 flechas[0].setposition(-450,270)#si no levantamos el lapiz dejara marca
 flechas[0].pendown()
 flechas[0].forward(60)
 #dibujarCirculo('q0', False, flechas[0])
-flechas[0] = dibujarCirculo('q0', False, flechas[0])
 
+#Aqui comparamos si el siguiente tiene estrella de kleene
+#debemos de hacerlo con todos los valores hijos
+bandera = False
+extra = 0
+for i in (arreglo1):
+    #print("valores ", i[0])
+    if type(i) == list or type(i) == tuple:
+        if(i == arreglo1[0]):
+            if(i[len(i)-1] == "*"):
+                #print("Es con kleene")
+                bandera = True#esto ayudara para ver si es final o no
+                #y con uno de los caminos que de si bastara para que sea final
+        elif(arreglo1[extra - 1] == "|"):#para evitar"a|b(b)*"
+            if(i[len(i)-1] == "*"):#Ya que nos posicionamos una posicion antes
+                #print("Es con kleene")#y con eso miramos si hubo |
+                bandera = True
+    extra += 1
+flechas[0] = dibujarCirculo('q0', bandera, flechas[0])
 
 #dibujarflechaC("ab", flechas[0])
 #algo =dibujarflechaR("ab", flechas[0])
@@ -127,7 +152,7 @@ inclinacion = 0
 nombre = 1
 for var in (arreglo1):
     print(var)
-    momentaneo = flechas[valor-1]
+    momentaneo = flechas[valor-1]#tomo de referencia la ultima flecha creada
     momentaneo2 = flechas[valor-1]
     if type(var) == list or type(var) == tuple:
         print("a is a list")
@@ -135,24 +160,28 @@ for var in (arreglo1):
         if(arreglo1[valor-1] != "|"):
             momentaneo2 = dibujarflechaR(var,momentaneo,inclinacion)
             cadena = "q" + str(nombre).strip()#concateno sin espacio
-            if(valor != len(arreglo1)): #Sirve para cuando es a|b     
-                if(valor != len(arreglo1)):
-                    if(arreglo1[valor] == "|"):
+            if(valor != len(arreglo1)): #Sirve para cuando es a|b  
+                if(arreglo1[valor] == "|"):
+                    flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)
+                elif(type(arreglo1[valor]) == list or type(arreglo1[valor]) == tuple):#Aqui abajo añadimos la condicion kleene
+                    print("Existe una lista", arreglo1[valor])
+                    if(arreglo1[valor][len(arreglo1[valor])-1] == "*"):
+                        print("el siguiente es kleene")
                         flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)
-                    else:
-                        flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
+                    #flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)
+                else:
+                    flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
             else:#Aqui detecta si es estado final
                 flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)      
             nombre += 1#para el nombre de q y asi
-        else:#Me voy al inicio
+        else:#Me voy al inicio aqui surgen otros caminos
             inclinacion += 35 #inclino mas la flecha 
             flechas[valor].penup()
-            #flechas[valor].setposition(-290,0)
             flechas[valor].setposition(flechas[0]._position[0] - inclinacion/2
             ,flechas[0]._position[1]-inclinacion*9/10)
             flechas[valor].pendown()
-            print(flechas[valor - 1]._position[0])
-            print("Componer angulo")
+            #print("Componer angulo")
     valor += 1
+print(arreglo1)
 ventana.exitonclick()
 
