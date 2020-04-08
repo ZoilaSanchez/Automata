@@ -1,6 +1,6 @@
 #ctrl + k +c (comenta), ctrl + k +u (descomenta)
 import turtle
-cadena = "a|a"
+cadena = "ab|abcc"
 flechas = []
 simbolosJerarquia = ["(", ")"]
 simbolosOperaciones =["|", "*"]
@@ -44,10 +44,13 @@ def dibujarCirculo(nombre, final, flecha):
     circulo.hideturtle()
     return circulo
 #------------------------------------------------------
-def dibujarflechaR(letter,flecha):#De flecha recta
+def dibujarflechaR(letter,flecha,angulo):#De flecha recta
     arrow = turtle.Turtle()
     #Lo movemos mas adelante ya que se dibuja un circulo y las letras
     arrow.penup()
+    
+    arrow.right(angulo)
+
     arrow.setposition(flecha._position[0]+60, flecha._position[1])
     arrow.pendown()
     if(len(letter) > 1):
@@ -120,6 +123,8 @@ flechas[0] = dibujarCirculo('q0', False, flechas[0])
 #dibujarCirculo('q1', False, algo)
 #dibujarflechaC('c', algo)  
 valor = 1
+inclinacion = 0
+nombre = 1
 for var in (arreglo1):
     print(var)
     momentaneo = flechas[valor-1]
@@ -127,16 +132,27 @@ for var in (arreglo1):
     if type(var) == list or type(var) == tuple:
         print("a is a list")
     else:
-        momentaneo2 = dibujarflechaR(var,momentaneo)
-        cadena = "q" + str(valor).strip()#concateno sin espacio
-        if(valor != len(arreglo1)): #Sirve para cuando es a|b     
-            if(valor != len(arreglo1)):
-                if(arreglo1[valor] == "|"):
-                    flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)
-                else:
-                    flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
-        else:#Aqui detecta si es estado final
-            flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)      
+        if(arreglo1[valor-1] != "|"):
+            momentaneo2 = dibujarflechaR(var,momentaneo,inclinacion)
+            cadena = "q" + str(nombre).strip()#concateno sin espacio
+            if(valor != len(arreglo1)): #Sirve para cuando es a|b     
+                if(valor != len(arreglo1)):
+                    if(arreglo1[valor] == "|"):
+                        flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)
+                    else:
+                        flechas[valor]=dibujarCirculo(cadena, False, momentaneo2)
+            else:#Aqui detecta si es estado final
+                flechas[valor]=dibujarCirculo(cadena, True, momentaneo2)      
+            nombre += 1#para el nombre de q y asi
+        else:#Me voy al inicio
+            inclinacion += 35 #inclino mas la flecha 
+            flechas[valor].penup()
+            #flechas[valor].setposition(-290,0)
+            flechas[valor].setposition(flechas[0]._position[0] - inclinacion/2
+            ,flechas[0]._position[1]-inclinacion*9/10)
+            flechas[valor].pendown()
+            print(flechas[valor - 1]._position[0])
+            print("Componer angulo")
     valor += 1
 ventana.exitonclick()
 
