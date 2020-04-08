@@ -1,7 +1,7 @@
 #ctrl + k +c (comenta), ctrl + k +u (descomenta)
 import turtle
-#cadena = "abc(b)*|ba"
-cadena = "(c)*|b"
+#cadena = "(b)*aa|ba"
+cadena = "ab(c)*|(d)*a"
 flechas = []
 simbolosJerarquia = ["(", ")"]
 simbolosOperaciones =["|", "*"]
@@ -131,12 +131,12 @@ extra = 0
 for i in (arreglo1):
     #print("valores ", i[0])
     if type(i) == list or type(i) == tuple:
-        if(i == arreglo1[0]):
+        if(i == arreglo1[0] and arreglo1[extra] == "|"):# para evitar problemas con eso cadena = "(b)*aa|ba"
             if(i[len(i)-1] == "*"):
                 #print("Es con kleene")
                 bandera = True#esto ayudara para ver si es final o no
                 #y con uno de los caminos que de si bastara para que sea final
-        elif(arreglo1[extra - 1] == "|"):#para evitar"a|b(b)*"
+        elif(arreglo1[extra - 1] == "|" and arreglo1[extra] == "|"):#para evitar"a|b(b)*"
             if(i[len(i)-1] == "*"):#Ya que nos posicionamos una posicion antes
                 #print("Es con kleene")#y con eso miramos si hubo |
                 bandera = True
@@ -151,7 +151,7 @@ valor = 1
 inclinacion = 0
 nombre = 1
 for var in (arreglo1):
-    print(var)
+    #print(var)
     momentaneo = flechas[valor-1]#tomo de referencia la ultima flecha creada
     momentaneo2 = flechas[valor-1]
     if type(var) == list or type(var) == tuple:
