@@ -1,7 +1,4 @@
 from tkinter import*
-from easygui import * 
-import easygui as eg
-import sys
 from tkinter import messagebox
 import ctypes
 import re
