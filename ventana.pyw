@@ -89,14 +89,14 @@ def extraerautomata():
                         mostrarlen.append(i)
             
             copia=lenguaje
-            print(copia)     
-            print(mostrarlen)     
+            #print(copia)     
+            #print(mostrarlen)     
             for z in mostrarlen:
                 copia.remove(z)
-            print(copia)
+            #print(copia)
             for item in copia:
                 sim.append(item)
-            print(sim)
+            #print(sim)
             if(not sim):
                 print("no hay simbolos")
                 #tamcine se puede hacer qeu sea correcto
@@ -108,8 +108,10 @@ def extraerautomata():
                     else:
                          print('',end="")
                 if(not erroes):
-                    print("correcto")
                 #aqui la cadena es correcta
+                    print("la cadena es correcta el automata es el siguiente : ")
+                    print("--------------- FERNANDO ----------------------------")
+                    print(auto)
                 else:
                      messagebox.showerror(message="simbolos incorrecto", title="Aviso")   
 
