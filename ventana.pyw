@@ -2,7 +2,9 @@ from tkinter import*
 from tkinter import messagebox
 import ctypes
 import re
+import turtle
 from main import dibujarAutomata
+
 #configurar la pantalla del programa de acuerdo a la compu
 user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()
