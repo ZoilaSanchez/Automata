@@ -1,8 +1,12 @@
 from tkinter import*
+from easygui import * 
+import easygui as eg
+import sys
 from tkinter import messagebox
 import ctypes
 import re
-from main import dibujarAutomata
+
+
 #configurar la pantalla del programa de acuerdo a la compu
 user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()
@@ -50,7 +54,6 @@ dibujotxt.config(fg="blue",bg="white")
 lenguaje=[]
 validacion_texto_vacio=""
 cadenita=""
-automata = dibujarAutomata("")
 #generar botones eventos
 def extraerautomata():
     autos = automatatxt.get("1.0","end-1c")
@@ -89,20 +92,17 @@ def extraerautomata():
                         mostrarlen.append(i)
             
             copia=lenguaje
-            #print(copia)     
-            #print(mostrarlen)     
+            print(copia)     
+            print(mostrarlen)     
             for z in mostrarlen:
                 copia.remove(z)
-            #print(copia)
+            print(copia)
             for item in copia:
                 sim.append(item)
-            #print(sim)
+            print(sim)
             if(not sim):
                 print("no hay simbolos")
-                #messagebox.showwarning(message="No hay simbolosdfjskf", title="Aviso")
                 #tamcine se puede hacer qeu sea correcto
-                automata.cambiarLetra(auto)
-                automata.crear()
             else:    
                 for item in sim:
                     x=simbolosaceptados.count(item)
@@ -111,10 +111,8 @@ def extraerautomata():
                     else:
                          print('',end="")
                 if(not erroes):
-                #aqui la cadena es correcta
-                    automata.cambiarLetra(auto)
-                    automata.crear()
-                    print(auto)
+                    print("correcto")
+                    print("Puedo empezarrrrrrrrrr")
                 else:
                      messagebox.showerror(message="simbolos incorrecto", title="Aviso")   
 
