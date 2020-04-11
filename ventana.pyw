@@ -116,6 +116,8 @@ def extraerautomata():
                 #aqui la cadena es correcta
                     automata.cambiarLetra(auto)
                     automata.crear()
+                    print("tamalo en x",automata.devolverVentana()[0])
+                    print("tamaño en y",automata.devolverVentana()[1])
                     print(auto)
                 else:
                      messagebox.showerror(message="simbolos incorrecto", title="Aviso")   
