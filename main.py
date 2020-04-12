@@ -8,6 +8,7 @@ import turtle
 #cadena = "aa(b)*|ba"
 class dibujarAutomata():
     cadena = None
+    Tam = ""
     def __init__(self, palabra):
         self.cadena = palabra
 
@@ -277,7 +278,10 @@ class dibujarAutomata():
                     #print("Componer angulo")
             valor += 1 #Sumo las flechas normales
         print(arreglo1)
+        self.Tam = ventana._window_size()
         ventana.exitonclick()
     def cambiarLetra(self, otraPalabra):
         self.cadena = otraPalabra
 
+    def devolverVentana(self):
+        return self.Tam
