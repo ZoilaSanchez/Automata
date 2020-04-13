@@ -35,6 +35,12 @@ dibujolabel=Label(miframe,text="Dibujar")
 dibujolabel.place(x=1250,y=50)
 dibujolabel.config(fg="Green Yellow",bg="Black")#cambiar el color
 
+lenguaje=Label(miframe,text="Lenguaje: ")
+lenguaje.place(x=50,y=550)
+lenguaje.config(fg="Green Yellow",bg="Black")#cambiar el color
+
+
+
 ##Generar cuadros de texto
 automatatxt=Text(miframe,width=40 ,height=6)#poscion del dibujo # esto me ayuda a extraer el lengueja
 automatatxt.place(x=70,y=120)
@@ -47,6 +53,7 @@ comcadena.config(fg="blue",bg="white")
 dibujotxt=Text(miframe,width=128,height=45)#poscion del dibujo # esto es para dibujar
 dibujotxt.place(x=600,y=100)
 dibujotxt.config(fg="blue",bg="white")
+
 
 #Estas con las variable a utilizar
 lenguaje=[]
@@ -91,8 +98,10 @@ def extraerautomata():
                         mostrarlen.append(i)
             
             copia=lenguaje
-            #print(copia)     
-            #print(mostrarlen)     
+            print("comosdsf ")     
+            print(mostrarlen)   
+            lengu = " ".join(mostrarlen)
+            print(lengu)
             for z in mostrarlen:
                 copia.remove(z)
             #print(copia)
@@ -101,10 +110,16 @@ def extraerautomata():
             #print(sim)
             if(not sim):
                 print("no hay simbolos")
+                
+                lenguaje=Label(miframe,text=lengu.upper())
+                lenguaje.place(x=100,y=600)
+                lenguaje.config(fg="Green Yellow",bg="Black",font=("comic",24))#cambiar el color
                 #messagebox.showwarning(message="No hay simbolosdfjskf", title="Aviso")
                 #tamcine se puede hacer qeu sea correcto
                 automata.cambiarLetra(auto)
                 automata.crear()
+                
+                
             else:    
                 for item in sim:
                     x=simbolosaceptados.count(item)
@@ -114,11 +129,12 @@ def extraerautomata():
                          print('',end="")
                 if(not erroes):
                 #aqui la cadena es correcta
+                    lenguaje=Label(miframe,text=lengu.upper())
+                    lenguaje.place(x=100,y=600)
+                    lenguaje.config(fg="Green Yellow",bg="Black",font=("comic",24))#cambiar el color
                     automata.cambiarLetra(auto)
                     automata.crear()
-                    print("tamalo en x",automata.devolverVentana()[0])
-                    print("tamaño en y",automata.devolverVentana()[1])
-                    print(auto)
+                   
                 else:
                      messagebox.showerror(message="simbolos incorrecto", title="Aviso")   
 

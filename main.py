@@ -11,7 +11,6 @@ class dibujarAutomata():
     Tam = ""
     def __init__(self, palabra):
         self.cadena = palabra
-
     #-------------------------------------------------------------
     def dibujarCirculo(self, nombre, final, flecha):
         circulo = turtle.Turtle()
@@ -277,8 +276,11 @@ class dibujarAutomata():
                     flechas[valor].pendown()
                     #print("Componer angulo")
             valor += 1 #Sumo las flechas normales
+        
         print(arreglo1)
         self.Tam = ventana._window_size()
+        print(self.Tam[0])
+        print(self.Tam[1])
         ventana.exitonclick()
     def cambiarLetra(self, otraPalabra):
         self.cadena = otraPalabra
