@@ -7,15 +7,18 @@ import turtle
 from main import dibujarAutomata
 
 #configurar la pantalla del programa de acuerdo a la compu
-user32 = ctypes.windll.user32
-user32.SetProcessDPIAware()
-ancho, alto = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+#user32 = ctypes.windll.user32
+#user32.SetProcessDPIAware()
+#ancho, alto = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+ancho= 400
+alto=700
 resul=str(ancho)+"x"+str(alto)
 
 #configurar root que seria la ventana en si
 root=Tk()
 root.config(bg="white")
-root.geometry(resul)
+root.geometry(resul+"+0+40")
+#root.geometry("650x700+0+0")
 root.resizable(width=0, height=0)
 
 #configurar el frame donde se insertaran los demas botones
@@ -32,29 +35,18 @@ comprobacionlable=Label(miframe,text="Ingrese la Cadena: ")
 comprobacionlable.place(x=50,y=300)
 comprobacionlable.config(fg="Green Yellow",bg="Black")#cambiar el color
 
-dibujolabel=Label(miframe,text="Dibujar")
-dibujolabel.place(x=1250,y=50)
-dibujolabel.config(fg="Green Yellow",bg="Black")#cambiar el color
-
 lenguaje=Label(miframe,text="Lenguaje: ")
 lenguaje.place(x=50,y=550)
 lenguaje.config(fg="Green Yellow",bg="Black")#cambiar el color
 
-
-
 ##Generar cuadros de texto
-automatatxt=Text(miframe,width=40 ,height=6)#poscion del dibujo # esto me ayuda a extraer el lengueja
+automatatxt=Text(miframe,width=20 ,height=6)#poscion del dibujo # esto me ayuda a extraer el lengueja
 automatatxt.place(x=70,y=120)
 automatatxt.config(fg="blue",bg="white")
 
-comcadena=Text(miframe,width=40,height=6)#poscion del dibujo# esto lo introducira andrea 
+comcadena=Text(miframe,width=20,height=6)#poscion del dibujo# esto lo introducira andrea 
 comcadena.place(x=70,y=350)
 comcadena.config(fg="blue",bg="white")
-
-dibujotxt=Text(miframe,width=128,height=45)#poscion del dibujo # esto es para dibujar
-dibujotxt.place(x=600,y=100)
-dibujotxt.config(fg="blue",bg="white")
-
 
 #Estas con las variable a utilizar
 lenguaje=[]
@@ -513,11 +505,11 @@ img2=PhotoImage(file='c.png')
 
 
 botonverificar=Button(miframe,text="VERIFICAR",command=extraerautomata,image=img)
-botonverificar.place(x=505,y=145)
+botonverificar.place(x=250,y=145)
 
 
 botonverificar=Button(miframe,text="VERIFICAR CADENA",command=inicio_de_validacion,image=img2)
-botonverificar.place(x=505,y=375)
+botonverificar.place(x=250,y=375)
 
 #empieza las validaciones del programa
 def frecuencia(v):
