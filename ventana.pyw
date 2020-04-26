@@ -521,15 +521,4 @@ def frecuencia(v):
             res[caracter] = 1
     return res
 
-
-
-
-
-
-
-
-
-
-
-
 root.mainloop()# siempre va alfinal por la ventana
