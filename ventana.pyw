@@ -120,10 +120,15 @@ def validarcadena(El_automata,La_cadena):
                      
                 print("cont *****",cont)
                 print("tam ******",len(arrcadena))
-                if cont==len(arrcadena):
+                print ("cad a comparar",cad_a_comparar)
+                print("the string", the_string)
+                if cont==len(cad_a_comparar) and the_string==cad_a_comparar:
                     incorrecta="false"
-                if incorrecta=="false":
+                elif cont==len(cad_a_comparar) and the_string=="_":
                     incorrecta="false"
+
+                #if incorrecta=="false" and the_string==cad_a_comparar:
+                #    incorrecta="false"
                 elif the_string!=cad_a_comparar:
                     arrcadena=[]
                     for caracter in the_string:
@@ -188,6 +193,7 @@ def validarcadena(El_automata,La_cadena):
                         incorrecta="true"
 
                 print("veamos el tamaño de arrcadena",len(arrcadena))
+
                 if cont==len(cad_a_comparar):
                     print("aqui si entra")
                     if len(arrcadena)==len(cad_a_comparar):
@@ -301,13 +307,16 @@ def validarcadena(El_automata,La_cadena):
                # for y in range(0,len(arrcadena)):
                #     print("ARRCADENA",arrcadena[y])    
                 print("imprime cad")     
-                print (cad) 
+                print (cad)
+
+    if (El_automata==""):
+        incorrecta="true" 
     return incorrecta
 def inicio_de_validacion():
-   # La_cadena_i="abc"#llamar a los valores que ingresa el usuario 
-   # El_automata_i="(b)*aa|abc"#llamar a los valores que ingresa el usuario 
-    La_cadena_i = comcadena.get("1.0","end-1c")
-    El_automata_i = automatatxt.get("1.0","end-1c")
+    La_cadena_i="a"#llamar a los valores que ingresa el usuario 
+    El_automata_i="(b)*"#llamar a los valores que ingresa el usuario 
+  #  La_cadena_i = comcadena.get("1.0","end-1c")
+  #  El_automata_i = automatatxt.get("1.0","end-1c")
     arrautomata=[]
     cont_arraut=""
     autaux=""
@@ -358,6 +367,7 @@ def inicio_de_validacion():
                     incorrect=validarcadena(cont_arraut,La_cadena_i)
                     if incorrect=="true":
                         cont_arraut=""
+                print  ("el valor", incorrect)
             else:
                 if x<len(arrautomata)-1:
                     signo=arrautomata[x+1]
@@ -384,15 +394,7 @@ def inicio_de_validacion():
     print(cont_arraut)
     print("AQUI AQUI AQUI",incorrect)
     print(cont_arraut)
-    
-#volver vacios los *
-#hacer la función de separación
-parametro=""
-parametro =  "(b)*"              
-#print("ESTA ES LA RESPUESTA",validarcadena(parametro,"aaba"))
-inicio_de_validacion()
-#validarcadena(parametro,"baa")
-#generar botones eventos
+#Extración del automata
 def extraerautomata():
     autos = automatatxt.get("1.0","end-1c")
     autoss = autos.lower()
