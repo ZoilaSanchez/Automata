@@ -305,6 +305,8 @@ def inicio_de_validacion():
 
     for caracter in El_automata_i:
         arrautomata.append(caracter)
+        
+    arrautomata.append("|")
 
 
     for x in range(0,len(arrautomata)):
