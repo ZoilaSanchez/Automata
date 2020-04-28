@@ -313,10 +313,10 @@ def validarcadena(El_automata,La_cadena):
         incorrecta="true" 
     return incorrecta
 def inicio_de_validacion():
-    La_cadena_i="a"#llamar a los valores que ingresa el usuario 
-    El_automata_i="(b)*"#llamar a los valores que ingresa el usuario 
-  #  La_cadena_i = comcadena.get("1.0","end-1c")
-  #  El_automata_i = automatatxt.get("1.0","end-1c")
+    #La_cadena_i="a"#llamar a los valores que ingresa el usuario 
+    #El_automata_i="(b)*"#llamar a los valores que ingresa el usuario 
+    La_cadena_i = comcadena.get("1.0","end-1c")
+    El_automata_i = automatatxt.get("1.0","end-1c")
     arrautomata=[]
     cont_arraut=""
     autaux=""
