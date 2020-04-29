@@ -167,7 +167,8 @@ class dibujarAutomata():
                 arreglo1.append(var)
             aux += 1
         flechas[0].penup()
-        flechas[0].setposition(-450,280)#si no levantamos el lapiz dejara marca
+        # aqui voy editando la posicion-450
+        flechas[0].setposition(-375,280)#si no levantamos el lapiz dejara marca
         flechas[0].pendown()
         flechas[0].forward(60)
         #dibujarCirculo('q0', False, flechas[0])
