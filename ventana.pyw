@@ -18,6 +18,7 @@ resul=str(ancho)+"x"+str(alto)
 root=Tk()
 root.config(bg="white")
 root.geometry(resul+"+0+40")
+root.title("Ventana Inicial ")
 #root.geometry("650x700+0+0")
 root.resizable(width=0, height=0)
 
