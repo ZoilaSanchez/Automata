@@ -647,7 +647,8 @@ def extraercadena():
                      messagebox.showerror(message="simbolos incorrecto", title="Aviso")  
         
 
-
+def close_window (): 
+    root.destroy()
    
 #colocar imagenes a los botones
 img = PhotoImage(file='b.png')
@@ -660,6 +661,13 @@ botonverificar.place(x=250,y=145)
 
 botonverificar=Button(miframe,text="VERIFICAR CADENA",command=inicio_de_validacion,image=img2)
 botonverificar.place(x=250,y=375)
+
+
+buttones = Button (miframe, text = "CERRAR VENTANA", command = close_window)
+buttones.place(x=270,y=10)
+
+
+
 
 #empieza las validaciones del programa
 def frecuencia(v):
