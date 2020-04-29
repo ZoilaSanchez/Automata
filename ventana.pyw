@@ -54,8 +54,11 @@ validacion_texto_vacio=""
 cadenita=""
 automata = dibujarAutomata("")
 #validación de la cadena
-def validarcadena(El_automata,La_cadena):
+cadaux = ""
+incorrectaaux = ""
+def validarcadena(El_automata,La_cadena,agregado):
     #necesito en cadena
+    print("AGREGADO------------------------------", agregado)
     cad=""
     the_string=""
     the_automat=""
@@ -84,17 +87,45 @@ def validarcadena(El_automata,La_cadena):
         else:
             if signo=="*":
                 cont=0
-                tt=1                
+                tt=1    
+                extra=""            
                 print("encontro un ", signo)
                 cad_a_comparar=cad  
                 cad=""  
                 print("CADENA", arrcadena)
                 for y in range(0,len(arrcadena)):
                    # print("letra ", arrcadena[y])
-                    if arrcadena[y]=="_":
+                  
+                    if arrcadena[y]=="_" and y==0:
                         incorrecta="false"
+                        extra="_"
+                        print("saber que onda ")
+                        if len(arrcadena)==1:
+                            #print("modifica")
+                            the_string="" 
+                            the_string=the_string+arrcadena[y]
+                            cont=cont+1
+                        elif arrcadena[y]=="_":
+                            print("modifica")
+                            the_string="" 
+                            the_string=the_string+arrcadena[y]
+                            cont=cont+1
+                        #else:
+                        #    the_string="" 
+                        #    the_string=the_string+arrcadena[y+1]
+                         #   cont=cont+1
+                        print("tamaño de arrcadena", len(arrcadena))
+                        print("cadena sobrante", the_string)
+                    elif extra=="_":
+                        incorrecta="false" 
+                        print("SOLO ENTRA AQUI") 
+                        #extra="vacia"
+                        #the_string="" 
+                        the_string=the_string+arrcadena[y]
+                        cont=cont+1
+                        print("cadena sobrante", the_string)
 
-                    if cont<len(cad_a_comparar):
+                    elif cont<len(cad_a_comparar):
                         the_string=the_string+arrcadena[y]
                         print("the_string"," " ,the_string)
                         cont=cont+1
@@ -107,13 +138,24 @@ def validarcadena(El_automata,La_cadena):
                             the_string=the_string+arrcadena[y]
                             cont=cont+1
                             print("veamos acá")    
-                            incorrecta="false"       
+                            incorrecta="false"
+                            setvalaux(incorrecta)       
+                            print("78946513", the_string)
+                            print("*/*/*/*/ incorrectaaux /*/*/* ",getvalaux())
                         else: 
+                            print("/////////////////", arrcadena[y])
+                            print("cont",cont)
+                            the_string=""
                             the_string=the_string+arrcadena[y]
                             cont=cont+1
+                            incorrecta="true"
+                            print("SKDJFASKF", the_string)
                             print("acá no son iguales")
 
+
                     elif cont>len(cad_a_comparar):
+                        print("contador mayor que len(cad_a_comparar)")
+                        print("cont",cont)
                         the_string=the_string+arrcadena[y]
                         cont=cont+1
                         print("cadena sobrante", the_string)
@@ -122,20 +164,35 @@ def validarcadena(El_automata,La_cadena):
                 print("tam ******",len(arrcadena))
                 print ("cad a comparar",cad_a_comparar)
                 print("the string", the_string)
+                print("val de incorrecta", incorrecta)
                 if cont==len(cad_a_comparar) and the_string==cad_a_comparar:
+                    print("op 1")
                     incorrecta="false"
                 elif cont==len(cad_a_comparar) and the_string=="_":
                     incorrecta="false"
-
-                #if incorrecta=="false" and the_string==cad_a_comparar:
+                    print("op 2")
+                elif incorrecta=="false" and extra=="vacia":
+                    incorrecta="false"
+                    print("esa por el ald")
+                    print("op 3")
+                #if incorrecta=="false":
                 #    incorrecta="false"
                 elif the_string!=cad_a_comparar:
-                    arrcadena=[]
-                    for caracter in the_string:
-                        arrcadena.append(caracter)
-                    print("cad modificada",arrcadena)
-                    incorrecta="true"
-                    print("incorrecta",incorrecta)
+                    print("op 4")
+                    if the_string=="_":
+                        incorrecta="false"
+                    else:
+                        arrcadena=[]
+                        for caracter in the_string:
+                            arrcadena.append(caracter)
+                            #cadaux=cadaux+caracter
+                        print("cad modificada",arrcadena)
+                        setcadaux(the_string)
+                        #print("the_string********", the_string)
+                        incorrecta="true"
+                        print("incorrecta",incorrecta)
+                        cadaux=the_string
+                        print("CAD AUX", cadaux)
                # else:
                #     arrcadena=[]
                #     print("CADENA CORRECTA")
@@ -313,14 +370,19 @@ def validarcadena(El_automata,La_cadena):
         incorrecta="true" 
     return incorrecta
 def inicio_de_validacion():
-    #La_cadena_i="a"#llamar a los valores que ingresa el usuario 
-    #El_automata_i="(b)*"#llamar a los valores que ingresa el usuario 
+    print("INCORRECTA AUX", getvalaux())
+    #print("CADAUX", cadux)
+    #La_cadena_i="bacacacacaaj"#lblamar a los valores que ingresa el usuario 
+    #El_automata_i="b(ac)*aa(j)*"#llamar a los valores que ingresa el usuario 
+    #La_cadena_i="bbbbbadadjadcccc"
+    #El_automata_i="(b)*(ad)*(c)*"
     La_cadena_i = comcadena.get("1.0","end-1c")
     El_automata_i = automatatxt.get("1.0","end-1c")
     arrautomata=[]
     cont_arraut=""
     autaux=""
     sobra=""
+    agregado="primera"
     q=0
     incorrect="true"
     es="false"
@@ -346,25 +408,30 @@ def inicio_de_validacion():
             if x<len(arrautomata):
                 cont_arraut=cont_arraut+signo
                 singo=arrautomata[x+1]
+        #elif signo=="(":
+        #    cont_arraut=""
+        #    if x<len(arrautomata):
+        #       cont_arraut=cont_arraut+signo
+        #        singo=arrautomata[x+1]        
         elif arrautomata[x-1]!="*" and signo=="(":
-            if arrautomata[x-1]!="|":
+            print("entra en != *---------(")
+            if arrautomata[x-1]!="|" :
                 if x<len(arrautomata):
                     cont_arraut=cont_arraut+("]")
                     cont_arraut=cont_arraut+singo
                     singo=arrautomata[x+1]
-
         elif signo=="|":
             if incorrect=="true":
                 if arrautomata[x-1]=="*":
                     print("cadena", cont_arraut)
                     #llamar  a la función que
-                    incorrect=validarcadena(cont_arraut,La_cadena_i)
+                    incorrect=validarcadena(cont_arraut,La_cadena_i,"")
                     if incorrect=="true":
                         cont_arraut=""
                 else:
                     cont_arraut=cont_arraut+signo
                     print ("la cadena", cont_arraut)
-                    incorrect=validarcadena(cont_arraut,La_cadena_i)
+                    incorrect=validarcadena(cont_arraut,La_cadena_i,"")
                     if incorrect=="true":
                         cont_arraut=""
                 print  ("el valor", incorrect)
@@ -373,12 +440,34 @@ def inicio_de_validacion():
                     signo=arrautomata[x+1]
                 #llamar a validación
         elif signo=="*":
-            print("encontro un *")
-            cont_arraut=cont_arraut+signo  
-            print(cont_arraut)
-            incorrect=validarcadena(cont_arraut,La_cadena_i)
+            if getvalaux()=="":
+                print("encontro un *")
+                cont_arraut=cont_arraut+signo  
+                print(cont_arraut)
+                incorrect=validarcadena(cont_arraut,La_cadena_i,agregado)
+                cnt_arraut=""
+                agregado=""
+                print("INCORRECT",  incorrect)
+                print("¡¡¡¡¡¡¡¡¡incorrectaaux!!!!!!!!!!!!!!!", getvalaux())
+            elif getvalaux()=="false":
+                print("*-*-*-*-* encontro un *-*-*-*-     *", getcadaux())
+                cont_arraut=cont_arraut+signo  
+                print(cont_arraut)
+                incorrect=validarcadena(cont_arraut,getcadaux(),agregado)
+                cnt_arraut=""
+                agregado=""
+                #setcadaux("")
+
+            if (incorrect=="false"):
+                cont_arraut=""
+        elif signo=="(" and arrautomata[x-1]=="*":
+            #if incorrect=="false":
+            print("encontro otra estrella de kleen")
             cont_arraut=""
-            print("INCORRECT",  incorrect)
+            cont_arraut=cont_arraut+signo
+            agregado="*("  
+    #        else:
+    #            incorrect="true"
         else:
       
             if x<len(arrautomata)-1:
@@ -394,6 +483,29 @@ def inicio_de_validacion():
     print(cont_arraut)
     print("AQUI AQUI AQUI",incorrect)
     print(cont_arraut)
+    
+#volver vacios los *
+#hacer la función de separación
+def setvalaux(the_aux):
+    global incorrectaaux 
+    incorrectaaux = the_aux
+
+def getvalaux():
+    return incorrectaaux
+
+def setcadaux(the_aux):
+    global cadaux
+    cadaux = the_aux
+
+def getcadaux():
+    return cadaux
+
+#parametro=""
+#parametro =  "(b)*"              
+#print("ESTA ES LA RESPUESTA",validarcadena(parametro,"aaba"))
+#inicio_de_validacion()
+#validarcadena(parametro,"baa")
+#falta hacer que acepte vaciones en cadenas así -> (b)*(c)*
 #Extración del automata
 def extraerautomata():
     autos = automatatxt.get("1.0","end-1c")
